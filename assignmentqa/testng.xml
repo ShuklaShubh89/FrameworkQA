@@ -1,0 +1,22 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="Suite1" verbose="1" parallel="tests" thread-count="2">
+	<test name="Test1">
+		<classes>
+			<class name="com.sapient.assignmentqa.tests.LoginTest">
+				<methods>
+					<include name="testValidLogin" />
+				</methods>
+			</class>
+		</classes>
+	</test>
+	<test name="Test2">
+		<classes>
+			<class name="com.sapient.assignmentqa.tests.LoginTest">
+				<methods>
+					<include name="testLogin" />
+					<include name="testWrongLogin" />
+				</methods>
+			</class>
+		</classes>
+	</test>
+</suite>

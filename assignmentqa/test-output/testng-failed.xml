@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite thread-count="2" guice-stage="DEVELOPMENT" name="Failed suite [Suite1]" parallel="methods">
+  <test thread-count="2" name="Test1(failed)" parallel="methods">
+    <classes>
+      <class name="com.sapient.assignmentqa.tests.LoginTest">
+        <methods>
+          <include name="testValidLogin"/>
+          <include name="tearDown"/>
+          <include name="testWrongLogin"/>
+          <include name="setup"/>
+        </methods>
+      </class> <!-- com.sapient.assignmentqa.tests.LoginTest -->
+    </classes>
+  </test> <!-- Test1(failed) -->
+</suite> <!-- Failed suite [Suite1] -->
