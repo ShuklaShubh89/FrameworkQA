@@ -7,16 +7,15 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.google.inject.Inject;
+import com.sapient.assignmentqa.framework.GlobalPage;
 
-public class HomePage {
+public class HomePage extends GlobalPage {
 
 	private WebDriver Driver;
-	
-	@Inject
-	private WebDriverWait wait;
 
 	@Inject
 	public HomePage(EventFiringWebDriver driver) {
+		super(driver);
 		this.Driver = driver;
 	}
 
@@ -35,11 +34,10 @@ public class HomePage {
 
 	public void clickLogin() {
 		Driver.findElement(login).click();
-		;
 	}
 
 	public boolean getDateOnPage() {
-		wait.until(ExpectedConditions.presenceOfElementLocated(dateText));
+		this.waitForElementDOMPresence(dateText);
 		return Driver.findElement(dateText).isDisplayed();
 	}
 

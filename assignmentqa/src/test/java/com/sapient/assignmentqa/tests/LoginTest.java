@@ -12,30 +12,28 @@ import com.google.inject.name.Named;
 import com.sapient.assignmentqa.pages.*;
 import com.sapient.assignmentqa.framework.DriverModule;
 
-@Guice(modules = {
-	    DriverModule.class
-	})
+@Guice(modules = { DriverModule.class })
 
 public class LoginTest {
 
-	@Inject 
+	@Inject
 	EventFiringWebDriver driver;
-	
+
 	@Inject
 	private HomePage homepage;
-	
+
 	@Inject
 	private SignOnPage signonPage;
-	
+
 	@Inject
-    @Named("URL")
-    private String URL;
+	@Named("URL")
+	private String URL;
 	@Inject
 	@Named("Username")
-    private String UserName;
+	private String UserName;
 	@Inject
 	@Named("Password")
-    private String Password;
+	private String Password;
 
 	@BeforeMethod
 	public void setup() throws IOException {
@@ -64,7 +62,7 @@ public class LoginTest {
 		homepage.clickLogin();
 		Assert.assertTrue(driver.getCurrentUrl().contains("mercuryreservation.php"));
 	}
-	
+
 	@AfterTest
 	public void tearDown() throws IOException {
 		driver.quit();

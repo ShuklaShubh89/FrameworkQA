@@ -11,24 +11,25 @@ import com.google.inject.AbstractModule;
 import com.google.inject.Provides;
 import com.google.inject.Scopes;
 import com.google.inject.name.Names;
+import com.sapient.assignmentqa.framework.annotations.Timeout;
 
 public class DriverModule extends AbstractModule {
-
 	
     @Override
     protected void configure() {
 
-        bind(DriverManager.class)
-        .toProvider(DriverManagerProvider.class).in(Scopes.SINGLETON);
-       
-
-        Properties props = new Properties();
+    	Properties props = new Properties();
 		try {
 			props.load(new FileInputStream("resources/config.properties"));
 			Names.bindProperties(binder(), props);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		
+        bind(DriverManager.class)
+        .toProvider(DriverManagerProvider.class).in(Scopes.SINGLETON);
+        bindConstant().annotatedWith(Timeout.class).to(props.getProperty("Timeout"));
+
     }
     
     @Provides
@@ -47,8 +48,8 @@ public class DriverModule extends AbstractModule {
         return (JavascriptExecutor)(driver);
     }
 
-    @Provides
-    public WebDriverWait getWait(EventFiringWebDriver driver) {
-        return new WebDriverWait(driver,30);
+    @Provides 
+    public WebDriverWait getWait(EventFiringWebDriver driver,@Timeout String timeOut) {
+        return new WebDriverWait(driver,Integer.parseInt(timeOut));
     }
 }
